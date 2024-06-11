@@ -1,7 +1,13 @@
 import unittest
 import torch
 from torch.utils.data import DataLoader
-from src.train import ChatDataset, NeuralNet
+import sys
+import os
+
+# Add the src directory to the path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+
+from train import ChatDataset, NeuralNet
 
 class TestTrain(unittest.TestCase):
     def test_dataset(self):

@@ -1,5 +1,11 @@
 import unittest
-from src.preprocess import tokenize, stem, bag_of_words
+import sys
+import os
+
+# Add the src directory to the path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+
+from preprocess import tokenize, stem, bag_of_words
 
 class TestPreprocess(unittest.TestCase):
     def test_tokenize(self):

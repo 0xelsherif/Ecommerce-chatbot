@@ -1,7 +1,13 @@
 import unittest
 import torch
-from src.chat import bot_name, model, all_words, tags
-from src.preprocess import tokenize, bag_of_words
+import sys
+import os
+
+# Add the src directory to the path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+
+from chat import bot_name, model, all_words, tags
+from preprocess import tokenize, bag_of_words
 
 class TestChat(unittest.TestCase):
     def test_bot_response(self):
