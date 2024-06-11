@@ -1,0 +1,6 @@
+torch
+nltk
+numpy
+mysql-connector-python
+fuzzywuzzy
+python-Levenshtein
