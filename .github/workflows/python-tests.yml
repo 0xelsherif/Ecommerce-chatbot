@@ -41,3 +41,5 @@ jobs:
     - name: Run tests
       run: |
         python tests/test_preprocess.py
+        python tests/test_train.py
+        python test_chat.py
