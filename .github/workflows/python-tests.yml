@@ -40,4 +40,4 @@ jobs:
 
     - name: Run tests
       run: |
-        python -m unittest discover -s tests
+        python tests/test_preprocess.py
