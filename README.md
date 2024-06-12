@@ -119,7 +119,7 @@ This project implements an intelligent chatbot for e-commerce customer support u
 .
 ├── data
 │   ├── intents.json          # JSON file containing training data for the chatbot
-│   └── database.sql              # SQL script to set up the database schema and initial data
+│   └── database.sql          # SQL script to set up the database schema and initial data
 ├── models
 │   └── chatbot_model.pth     # Trained model weights
 ├── src
