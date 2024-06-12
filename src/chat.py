@@ -36,7 +36,7 @@ if connection is None:
 def get_response(tag, intents_json, connection):
     if tag in ["laptops", "desktops", "tablets", "monitors", "accessories"]:
         query = f"""
-        SELECT product_name, description, price 
+        SELECT SKU, description, price 
         FROM product 
         WHERE category_id = (
             SELECT category_id 
