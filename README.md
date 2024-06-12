@@ -1,4 +1,3 @@
-
 # E-commerce Customer Support Chatbot
 
 ## Overview
@@ -18,16 +17,18 @@ This project implements an intelligent chatbot for e-commerce customer support u
 .
 ├── data
 │   ├── intents.json          # JSON file containing training data for the chatbot
+│   └── database.sql              # SQL script to set up the database schema and initial data
 ├── models
-│   ├── chatbot_model.pth     # Trained model weights
+│   └── chatbot_model.pth     # Trained model weights
 ├── src
 │   ├── chat.py               # Main script to run the chatbot
 │   ├── train.py              # Script to train the chatbot model
 │   ├── preprocess.py         # Script for preprocessing text data
-│   ├── database.py           # Script for database operations
+│   └── database.py           # Script for database operations
 ├── tests
 │   ├── test_chat.py          # Unit tests for chatbot
-│   ├── test_train.py         # Unit tests for model training
+│   ├── test_preprocess.py    # Unit tests for preprocessing functions
+│   └── test_train.py         # Unit tests for model training
 ├── requirements.txt          # Python dependencies
 ├── README.md                 # Project documentation
 └── .gitignore                # Git ignore file
