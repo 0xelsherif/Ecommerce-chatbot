@@ -13,17 +13,7 @@ def create_connection(host_name, user_name, user_password, db_name):
         print("Connection to MySQL DB successful")
     except Error as e:
         print(f"The error '{e}' occurred")
-
     return connection
-
-def execute_query(connection, query):
-    cursor = connection.cursor()
-    try:
-        cursor.execute(query)
-        connection.commit()
-        print("Query executed successfully")
-    except Error as e:
-        print(f"The error '{e}' occurred")
 
 def execute_read_query(connection, query):
     cursor = connection.cursor()
@@ -36,19 +26,15 @@ def execute_read_query(connection, query):
         print(f"The error '{e}' occurred")
         return None
 
-def log_chat_history(connection, customer_id, chat_text, response_text):
+def log_chat_history(connection, customer_id, user_message, bot_response):
     query = """
-    INSERT INTO Chat_History (customer_id, chat_text, response_text, chat_date) 
-    VALUES (%s, %s, %s, NOW())
+    INSERT INTO chat_history (customer_id, user_message, bot_response)
+    VALUES (%s, %s, %s)
     """
-    data = (customer_id, chat_text, response_text)
-    execute_query_with_params(connection, query, data)
-
-def execute_query_with_params(connection, query, params):
+    values = (customer_id, user_message, bot_response)
     cursor = connection.cursor()
     try:
-        cursor.execute(query, params)
+        cursor.execute(query, values)
         connection.commit()
-        print("Query executed successfully")
     except Error as e:
         print(f"The error '{e}' occurred")

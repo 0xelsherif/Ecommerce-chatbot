@@ -1,0 +1,242 @@
+// {
+//   "intents": [
+//     {
+//       "tag": "greeting",
+//       "patterns": [
+//         "Hi",
+//         "Hello",
+//         "Hey",
+//         "Good morning",
+//         "Good afternoon",
+//         "What's up"
+//       ],
+//       "responses": [
+//         "Hello! How can I assist you today?",
+//         "Hi there! How can I help?",
+//         "Greetings! How may I assist you?"
+//       ]
+//     },
+//     {
+//       "tag": "goodbye",
+//       "patterns": [
+//         "Bye",
+//         "Goodbye",
+//         "See you later",
+//         "Take care",
+//         "Farewell",
+//         "Catch you later",
+//         "Have a good day",
+//         "See you soon",
+//         "Talk to you later",
+//         "Bye bye",
+//         "Later"
+//       ],
+//       "responses": [
+//         "Goodbye! Have a great day!",
+//         "See you later! Take care!",
+//         "Farewell! If you need anything else, feel free to ask.",
+//         "Catch you later! Have a wonderful day!",
+//         "Bye! Looking forward to assisting you again."
+//       ]
+//     },
+//     {
+//       "tag": "Product Information",
+//       "patterns": [
+//         "What are the specifications of [specific product]?",
+//         "Is [specific product] in stock?",
+//         "Can you recommend a product for [specific need]?",
+//         "What are the best-selling electronics currently?",
+//         "Do you have user reviews for [specific product]?",
+//         "Tell me about [specific product]",
+//         "Details of [specific product]",
+//         "Do you have [specific product] available?"
+//       ],
+//       "responses": [
+//         "The specifications for [specific product] are as follows: [product specifications].",
+//         "Yes, [specific product] is currently in stock. Would you like to place an order?",
+//         "Based on your need for [specific need], I recommend [product]. It has the following features: [product features].",
+//         "The best-selling electronics right now are [list of products]. They are highly rated by our customers.",
+//         "Here are some user reviews for [specific product]: [user reviews].",
+//         "[specific product] is a great choice! It offers [product details].",
+//         "Currently, [specific product] is [availability status]."
+//       ]
+//     },
+//     {
+//       "tag": "Order and Shipping",
+//       "patterns": [
+//         "Where is my order?",
+//         "How do I track my shipment?",
+//         "Can I change my shipping address after placing an order?",
+//         "What are your shipping options and fees?",
+//         "Do you ship internationally?",
+//         "Order status for order [order number]",
+//         "Track order [order number]",
+//         "Change shipping address",
+//         "Shipping options",
+//         "Do you deliver internationally?"
+//       ],
+//       "responses": [
+//         "You can check your order status here: [link to order status]. Just enter your order number.",
+//         "To track your shipment, please use this link: [tracking link]. Enter your tracking number for the latest updates.",
+//         "Unfortunately, changing the shipping address after placing an order is not possible online. Please contact our support team for assistance.",
+//         "We offer various shipping options including standard, expedited, and overnight shipping. Fees vary based on your location and the chosen option. Here are the details: [shipping options and fees].",
+//         "Yes, we do ship internationally. Please refer to our international shipping guidelines here: [international shipping details].",
+//         "Your order status can be tracked using this link: [order tracking link] with your order number.",
+//         "To change your shipping address, please contact our customer support at [support contact].",
+//         "Here are our shipping options and associated fees: [detailed shipping options].",
+//         "Yes, we deliver to various international locations. You can find more information here: [international delivery info]."
+//       ]
+//     },
+//     {
+//       "tag": "Payments and Billing",
+//       "patterns": [
+//         "What payment methods do you accept?",
+//         "How do I view my billing history?",
+//         "What should I do if my payment is declined?",
+//         "Accepted payment methods",
+//         "How to view billing history",
+//         "Payment declined",
+//         "Payment options",
+//         "Billing history access"
+//       ],
+//       "responses": [
+//         "We accept the following payment methods: credit cards (Visa, MasterCard, American Express), PayPal, and Apple Pay.",
+//         "You can view your billing history by logging into your account and navigating to the 'Billing History' section: [link to billing history].",
+//         "If your payment is declined, please ensure that your payment details are correct and try again. If the issue persists, contact your bank or our support team for further assistance.",
+//         "We accept various payment methods including major credit cards, PayPal, and Apple Pay.",
+//         "To view your billing history, please log into your account and go to the 'Billing History' section.",
+//         "If your payment is declined, please verify your payment information and try again. If you still face issues, reach out to our support team or your bank.",
+//         "Our accepted payment methods include credit cards (Visa, MasterCard, American Express), PayPal, and Apple Pay.",
+//         "To access your billing history, log in to your account and navigate to 'Billing History'."
+//       ]
+//     },
+//     {
+//       "tag": "Returns and Exchanges",
+//       "patterns": [
+//         "What is your return policy?",
+//         "How do I initiate a return?",
+//         "How long does it take to process a return?",
+//         "Can I exchange an item?",
+//         "What do I do if I received a damaged item?",
+//         "Return policy",
+//         "Start a return",
+//         "Return processing time",
+//         "Exchange item",
+//         "Received damaged item",
+//         "How to return a product",
+//         "Return procedure",
+//         "Damaged product return"
+//       ],
+//       "responses": [
+//         "Our return policy allows you to return items within 30 days of receipt. The items must be in their original condition and packaging. For more details, visit: [return policy link].",
+//         "To initiate a return, please follow these steps: log into your account, go to 'Order History', select the order you wish to return, and follow the return instructions provided.",
+//         "Returns are typically processed within 5-7 business days after we receive the returned items.",
+//         "Yes, you can exchange an item within 30 days of purchase. Please follow the same procedure as for returns.",
+//         "If you received a damaged item, please contact our support team immediately with your order details and a photo of the damaged item.",
+//         "Our return policy allows for returns within 30 days. Items should be in their original condition. More details: [return policy link].",
+//         "To start a return, log into your account, go to 'Order History', and follow the return instructions.",
+//         "Return processing usually takes 5-7 business days after we receive your returned items.",
+//         "You can exchange items within 30 days of purchase by following our return procedure.",
+//         "For damaged items, contact our support team immediately with your order details and a photo of the item."
+//       ]
+//     },
+//     {
+//       "tag": "Warranty and Repairs",
+//       "patterns": [
+//         "Do your products come with a warranty?",
+//         "How do I claim a warranty?",
+//         "Do you offer extended warranties?",
+//         "Where can I get my device repaired?",
+//         "What should I do if my device is out of warranty?",
+//         "Product warranty",
+//         "Claim warranty",
+//         "Extended warranty options",
+//         "Device repair locations",
+//         "Out of warranty repair",
+//         "Warranty information",
+//         "How to claim warranty",
+//         "Repair services",
+//         "Expired warranty repair"
+//       ],
+//       "responses": [
+//         "Yes, our products come with a standard one-year warranty. For more details, visit: [warranty details link].",
+//         "To claim a warranty, please contact our support team with your purchase details and a description of the issue. They will guide you through the process.",
+//         "Yes, we offer extended warranties for select products. You can purchase an extended warranty during the checkout process or from your account dashboard within 30 days of your purchase.",
+//         "You can get your device repaired at our authorized service centers. Locate a service center near you here: [service center locator link].",
+//         "If your device is out of warranty, you can still get it repaired at our authorized service centers. Charges will apply based on the repair requirements.",
+//         "All our products come with a standard one-year warranty. More details: [warranty details link].",
+//         "To claim a warranty, contact our support team with your purchase information and issue description.",
+//         "We offer extended warranties for select products. You can purchase them during checkout or within 30 days from your account.",
+//         "Our authorized service centers can handle your device repairs. Find the nearest center here: [service center locator link].",
+//         "For out of warranty repairs, visit our authorized service centers. Charges will be based on the repair."
+//       ]
+//     },
+//     {
+//       "tag": "Brands",
+//       "patterns": [
+//         "Do you have products from [brand]?",
+//         "Tell me about [brand] products",
+//         "Show me products from [brand]",
+//         "Do you carry [brand] products?",
+//         "What brands do you offer?",
+//         "List of brands you carry",
+//         "Products by [brand]",
+//         "Brands available"
+//       ],
+//       "responses": [
+//         "Yes, we have a variety of products from [brand]. You can view them here: [brand product link].",
+//         "[brand] is known for its high-quality products. We carry a range of their items including [product categories].",
+//         "Here are the products we have from [brand]: [list of products].",
+//         "Yes, we carry products from [brand]. Check them out here: [brand product link].",
+//         "We offer products from a range of brands including HP, Dell, Apple, Asus, and Acer.",
+//         "Here is a list of brands we carry: HP, Dell, Apple, Asus, Acer, and more. You can browse products by brand here: [brands link].",
+//         "You can find a variety of products by [brand] here: [brand product link].",
+//         "We have a wide selection of brands available including HP, Dell, Apple, Asus, and Acer. Browse them here: [brands link]."
+//       ]
+//     },
+//     {
+//       "tag": "Product Categories",
+//       "patterns": [
+//         "Show me laptops",
+//         "Do you have desktops?",
+//         "What kind of tablets do you offer?",
+//         "I am looking for monitors",
+//         "Do you sell accessories?",
+//         "Product categories",
+//         "Categories of products you have",
+//         "What product categories are available?"
+//       ],
+//       "responses": [
+//         "Here are our laptops: [laptops link].",
+//         "Yes, we have a variety of desktops. Check them out here: [desktops link].",
+//         "We offer a wide range of tablets. You can view them here: [tablets link].",
+//         "Here are the monitors we have available: [monitors link].",
+//         "Yes, we sell various accessories. Browse them here: [accessories link].",
+//         "We offer a range of product categories including laptops, desktops, tablets, monitors, and accessories.",
+//         "Our product categories include laptops, desktops, tablets, monitors, and accessories. Explore them here: [categories link].",
+//         "You can browse products by category here: [categories link]."
+//       ]
+//     },
+//     {
+//       "tag": "Working Hours",
+//       "patterns": [
+//         "What are your working hours?",
+//         "When are you open?",
+//         "What time do you close?",
+//         "Business hours",
+//         "Opening hours",
+//         "Store hours",
+//         "Operating hours",
+//         "Office hours"
+//       ],
+//       "responses": [
+//         "Our working hours are Monday to Friday from 9 AM to 6 PM.",
+//         "We are open from 9 AM to 6 PM, Monday to Friday.",
+//         "Our store operates from 9 AM to 6 PM on weekdays.",
+//         "You can visit us between 9 AM and 6 PM, Monday to Friday.",
+//         "Our business hours are 9 AM to 6 PM, Monday to Friday.",
+//         "We are available from 9 AM to 6 PM, Monday through Friday."
+//       ]
+//     }
+//   ]
+// }
