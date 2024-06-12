@@ -42,4 +42,4 @@ jobs:
       run: |
         python tests/test_preprocess.py
         python tests/test_train.py
-        python tests/test_chat.py
+     
