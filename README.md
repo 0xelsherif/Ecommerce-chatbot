@@ -1,5 +1,6 @@
 # E-commerce Customer Support Chatbot
-![Tests](https://github.com/0xelsherif/Ecommerce-chatbot/actions/workflows/python-tests.yml/badge.svg)
+[![Tests](https://github.com/0xelsherif/Ecommerce-chatbot/actions/workflows/python-tests.yml/badge.svg)](https://github.com/0xelsherif/Ecommerce-chatbot/actions/workflows/python-tests.yml)
+
 
 ## Overview
 
