@@ -1,14 +1,15 @@
+import os
 import random
 import json
 import torch
-from preprocess import tokenize, stem, bag_of_words, load_intents
+from preprocess import tokenize, stem, bag_of_words, load_intents, get_best_match
 from train import NeuralNet
 from database import create_connection, log_chat_history, execute_read_query
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Load the trained model
-FILE = "models/chatbot_model.pth"
+FILE = os.path.join(os.path.dirname(__file__), '..', 'models', 'chatbot_model.pth')
 model_data = torch.load(FILE, map_location=device)
 
 input_size = model_data["input_size"]
@@ -23,20 +24,19 @@ model.load_state_dict(model_state)
 model.eval()
 
 # Load intents file
-with open("data/intents.json", "r") as f:
+with open(os.path.join(os.path.dirname(__file__), '..', 'data', 'intents.json'), "r") as f:
     intents = json.load(f)
 
 bot_name = "E-commerceBot"
 connection = create_connection("localhost", "root", "", "ecommerce_db")
 
 if connection is None:
-    print("Failed to connect to the database. Please check your credentials.")
-    exit()
+    raise Exception("Failed to connect to the database. Please check your credentials.")
 
 def get_response(tag, intents_json, connection):
     if tag in ["laptops", "desktops", "tablets", "monitors", "accessories"]:
         query = f"""
-        SELECT SKU, description, price 
+        SELECT product_name, description, price 
         FROM product 
         WHERE category_id = (
             SELECT category_id 
@@ -56,20 +56,22 @@ def get_response(tag, intents_json, connection):
                 return random.choice(intent["responses"])
     return "I'm not sure I understand. Can you please clarify?"
 
-print("Let's chat! (type 'quit' to exit)")
+def chat_with_bot(sentence):
+    best_match = None
+    for intent in intents["intents"]:
+        match = get_best_match(sentence, intent["patterns"])
+        if match:
+            best_match = intent["tag"]
+            break
 
-while True:
-    sentence = input("You: ")
-    if sentence == "quit":
-        break
+    if not best_match:
+        return "I'm not sure I understand. Can you please clarify?"
 
-    # Tokenize the sentence
     sentence_tokens = tokenize(sentence)
     X = bag_of_words(sentence_tokens, all_words)
     X = X.reshape(1, X.shape[0])
     X = torch.from_numpy(X).to(device)
 
-    # Get model predictions
     output = model(X)
     _, predicted = torch.max(output, dim=1)
     tag = tags[predicted.item()]
@@ -83,5 +85,14 @@ while True:
     else:
         response = "I'm not sure I understand. Can you please clarify?"
 
-    print(f"{bot_name}: {response}")
     log_chat_history(connection, 1, sentence, response)  # Assuming customer_id is 1 for this example
+    return response
+
+if __name__ == "__main__":
+    print("Let's chat! (type 'quit' to exit)")
+    while True:
+        sentence = input("You: ")
+        if sentence == "quit":
+            break
+        response = chat_with_bot(sentence)
+        print(f"{bot_name}: {response}")

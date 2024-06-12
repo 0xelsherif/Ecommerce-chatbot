@@ -1,31 +1,29 @@
-import unittest
-import torch
 import sys
 import os
 
-# Add the src directory to the path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+# Add the src directory to the system path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
-from chat import bot_name, model, all_words, tags
+import unittest
+from unittest.mock import patch
+import torch
+from chat import bot_name, model, all_words, tags, chat_with_bot
 from preprocess import tokenize, bag_of_words
+from database import create_connection
 
 class TestChat(unittest.TestCase):
-    def test_bot_response(self):
-        sentence = "Hi"
-        tokenized_sentence = tokenize(sentence)
-        bag = bag_of_words(tokenized_sentence, all_words)
-        X = bag.reshape(1, bag.shape[0])
-        X = torch.from_numpy(X)
-        
-        output = model(X)
-        _, predicted = torch.max(output, dim=1)
-        tag = tags[predicted.item()]
+    def setUp(self):
+        self.connection = create_connection("localhost", "root", "yourpassword", "ecommerce_db")
 
-        probs = torch.softmax(output, dim=1)
-        prob = probs[0][predicted.item()]
+    @patch('builtins.input', side_effect=['hello', 'quit'])
+    def test_greeting(self, mock_input):
+        response = chat_with_bot("hello")
+        self.assertIn(response, ["Hello! How can I assist you today?", "Hi there! How can I help?", "Greetings! How may I assist you?"])
 
-        self.assertGreater(prob.item(), 0.75)
-        self.assertIn(tag, ["greeting", "goodbye", "thanks", "payments"])
+    @patch('builtins.input', side_effect=['what laptops do you have', 'quit'])
+    def test_laptops(self, mock_input):
+        response = chat_with_bot("what laptops do you have")
+        self.assertTrue("Here are some laptops" in response or "Sorry, we currently do not have any laptops in stock." in response)
 
 if __name__ == "__main__":
     unittest.main()
