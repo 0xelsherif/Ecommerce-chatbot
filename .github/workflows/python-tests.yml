@@ -22,4 +22,4 @@ jobs:
 
     - name: Run tests
       run: |
-        python tests/test_train.py
+          py tests/test_train.py
