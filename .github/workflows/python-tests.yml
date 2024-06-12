@@ -1,0 +1,45 @@
+name: tests
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: yourpassword
+          MYSQL_DATABASE: ecommerce_db
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Download NLTK data
+      run: |
+        python -m nltk.downloader punkt
+
+    - name: Run tests
+      run: |
+        python tests/test_preprocess.py
+        python tests/test_train.py
+        python test_chat.py
