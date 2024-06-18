@@ -2,6 +2,7 @@ import os
 import random
 import json
 import torch
+import string
 from preprocess import tokenize, stem, bag_of_words, load_intents, get_best_match
 from train import NeuralNet
 from database import create_connection, log_chat_history, execute_read_query
@@ -33,8 +34,11 @@ connection = create_connection("localhost", "root", "", "computer_shop")
 if connection is None:
     raise Exception("Failed to connect to the database. Please check your credentials.")
 
+def clean_word(word):
+    return word.strip(string.punctuation).lower()
+
 def extract_tags_from_sentence(sentence, connection):
-    words = sentence.lower().split()
+    words = [clean_word(word) for word in sentence.split()]
     category_id = None
     brand_id = None
 
@@ -81,22 +85,6 @@ def get_response(tag, intents_json, connection, sentence):
         else:
             return f"Sorry, we currently do not have any products in stock."
 
-    if category_id:
-        query = f"""
-        SELECT name, description, price 
-        FROM products 
-        WHERE category_id = {category_id}
-        AND stock_quantity > 0
-        """
-        products = execute_read_query(connection, query)
-        print(f"Category query: {query}")
-        print(f"Products fetched: {products}")
-        if products:
-            product_list = "\n".join([f"Product Name: {product[0]}\nDescription: {product[1]}\nPrice: ${product[2]:.2f}\n" for product in products])
-            return f"Here are some products we have available in this category:\n\n{product_list}"
-        else:
-            return f"Sorry, we currently do not have any products in this category in stock."
-    
     if brand_id:
         query = f"""
         SELECT name, description, price 
@@ -112,6 +100,22 @@ def get_response(tag, intents_json, connection, sentence):
             return f"Here are some products we have available from this brand:\n\n{product_list}"
         else:
             return f"Sorry, we currently do not have any products from this brand in stock."
+
+    if category_id:
+        query = f"""
+        SELECT name, description, price 
+        FROM products 
+        WHERE category_id = {category_id}
+        AND stock_quantity > 0
+        """
+        products = execute_read_query(connection, query)
+        print(f"Category query: {query}")
+        print(f"Products fetched: {products}")
+        if products:
+            product_list = "\n".join([f"Product Name: {product[0]}\nDescription: {product[1]}\nPrice: ${product[2]:.2f}\n" for product in products])
+            return f"Here are some products we have available in this category:\n\n{product_list}"
+        else:
+            return f"Sorry, we currently do not have any products in this category in stock."
 
     # Default response for unknown tags
     for intent in intents_json["intents"]:
