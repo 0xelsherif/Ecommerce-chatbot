@@ -33,36 +33,38 @@ connection = create_connection("localhost", "root", "", "computer_shop")
 if connection is None:
     raise Exception("Failed to connect to the database. Please check your credentials.")
 
-def get_response(tag, intents_json, connection, sentence):
-    normalized_tag = tag.lower()
-
-    # Identify if the tag is a category or brand
-    is_category = False
-    is_brand = False
-
-    # Check if tag is a category
-    category_query = f"SELECT id FROM categories WHERE LOWER(name) = '{normalized_tag}'"
-    category_result = execute_read_query(connection, category_query)
-    if category_result:
-        is_category = True
-
-    # Check if tag is a brand
-    brand_query = f"SELECT id FROM brands WHERE LOWER(name) = '{normalized_tag}'"
-    brand_result = execute_read_query(connection, brand_query)
-    if brand_result:
-        is_brand = True
-
-    # If both category and brand are mentioned
+def extract_tags_from_sentence(sentence, connection):
     words = sentence.lower().split()
     category_id = None
     brand_id = None
 
-    if is_category:
-        category_id = category_result[0][0]
-    if is_brand:
-        brand_id = brand_result[0][0]
+    print(f"Processing words: {words}")
 
-    # Check if both category and brand are present in the sentence
+    for word in words:
+        category_query = f"SELECT id FROM categories WHERE LOWER(name) = '{word}'"
+        brand_query = f"SELECT id FROM brands WHERE LOWER(name) = '{word}'"
+
+        category_result = execute_read_query(connection, category_query)
+        brand_result = execute_read_query(connection, brand_query)
+
+        print(f"Checking word '{word}':")
+        print(f"  Category query: {category_query}")
+        print(f"  Category result: {category_result}")
+        print(f"  Brand query: {brand_query}")
+        print(f"  Brand result: {brand_result}")
+
+        if category_result and not category_id:
+            category_id = category_result[0][0]
+        if brand_result and not brand_id:
+            brand_id = brand_result[0][0]
+
+    return category_id, brand_id
+
+def get_response(tag, intents_json, connection, sentence):
+    category_id, brand_id = extract_tags_from_sentence(sentence, connection)
+    print(f"Extracted Category ID: {category_id}")
+    print(f"Extracted Brand ID: {brand_id}")
+
     if category_id and brand_id:
         query = f"""
         SELECT name, description, price 
@@ -71,13 +73,15 @@ def get_response(tag, intents_json, connection, sentence):
         AND stock_quantity > 0
         """
         products = execute_read_query(connection, query)
+        print(f"Combined query: {query}")
+        print(f"Products fetched: {products}")
         if products:
             product_list = "\n".join([f"Product Name: {product[0]}\nDescription: {product[1]}\nPrice: ${product[2]:.2f}\n" for product in products])
-            return f"Here are some {tag} {tag} we have available:\n\n{product_list}"
+            return f"Here are some products we have available:\n\n{product_list}"
         else:
-            return f"Sorry, we currently do not have any {tag} {tag} in stock."
+            return f"Sorry, we currently do not have any products in stock."
 
-    if is_category:
+    if category_id:
         query = f"""
         SELECT name, description, price 
         FROM products 
@@ -85,13 +89,15 @@ def get_response(tag, intents_json, connection, sentence):
         AND stock_quantity > 0
         """
         products = execute_read_query(connection, query)
+        print(f"Category query: {query}")
+        print(f"Products fetched: {products}")
         if products:
             product_list = "\n".join([f"Product Name: {product[0]}\nDescription: {product[1]}\nPrice: ${product[2]:.2f}\n" for product in products])
-            return f"Here are some {tag} we have available:\n\n{product_list}"
+            return f"Here are some products we have available in this category:\n\n{product_list}"
         else:
-            return f"Sorry, we currently do not have any {tag} in stock."
+            return f"Sorry, we currently do not have any products in this category in stock."
     
-    if is_brand:
+    if brand_id:
         query = f"""
         SELECT name, description, price 
         FROM products 
@@ -99,11 +105,13 @@ def get_response(tag, intents_json, connection, sentence):
         AND stock_quantity > 0
         """
         products = execute_read_query(connection, query)
+        print(f"Brand query: {query}")
+        print(f"Products fetched: {products}")
         if products:
             product_list = "\n".join([f"Product Name: {product[0]}\nDescription: {product[1]}\nPrice: ${product[2]:.2f}\n" for product in products])
-            return f"Here are some {tag} products we have available:\n\n{product_list}"
+            return f"Here are some products we have available from this brand:\n\n{product_list}"
         else:
-            return f"Sorry, we currently do not have any {tag} products in stock."
+            return f"Sorry, we currently do not have any products from this brand in stock."
 
     # Default response for unknown tags
     for intent in intents_json["intents"]:
