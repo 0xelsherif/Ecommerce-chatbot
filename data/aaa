@@ -1,0 +1,116 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "Hello",
+        "Hey",
+        "Good morning",
+        "Good afternoon",
+        "What's up"
+      ],
+      "responses": [
+        "Hello! How can I assist you today?",
+        "Hi there! How can I help?",
+        "Greetings! How may I assist you?"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "Bye",
+        "Goodbye",
+        "See you later",
+        "Take care",
+        "Farewell",
+        "Catch you later",
+        "Have a good day",
+        "See you soon",
+        "Talk to you later",
+        "Bye bye",
+        "Later"
+      ],
+      "responses": [
+        "Goodbye! Have a great day!",
+        "See you later! Take care!",
+        "Farewell! If you need anything else, feel free to ask.",
+        "Catch you later! Have a wonderful day!",
+        "Bye! Looking forward to assisting you again."
+      ]
+    },
+    {
+      "tag": "laptops",
+      "patterns": [
+        "What laptops do you have?",
+        "Show me laptops",
+        "I am looking for laptops",
+        "Do you sell laptops?"
+      ],
+      "responses": [
+        "Here are some laptops we have available: [laptops list]"
+      ]
+    },
+    {
+      "tag": "desktops",
+      "patterns": [
+        "Do you have desktops?",
+        "Show me desktops",
+        "I am looking for desktops",
+        "Do you sell desktops?"
+      ],
+      "responses": [
+        "Yes, we have a variety of desktops. Check them out here: [desktops link]."
+      ]
+    },
+    {
+      "tag": "tablets",
+      "patterns": [
+        "What kind of tablets do you offer?",
+        "Show me tablets",
+        "I am looking for tablets",
+        "Do you sell tablets?"
+      ],
+      "responses": [
+        "We offer a wide range of tablets. You can view them here: [tablets link]."
+      ]
+    },
+    {
+      "tag": "monitors",
+      "patterns": [
+        "I am looking for monitors",
+        "Show me monitors",
+        "Do you sell monitors?",
+        "What monitors do you have?"
+      ],
+      "responses": [
+        "Here are the monitors we have available: [monitors link]."
+      ]
+    },
+    {
+      "tag": "accessories",
+      "patterns": [
+        "Do you sell accessories?",
+        "Show me accessories",
+        "I am looking for accessories",
+        "What accessories do you have?"
+      ],
+      "responses": [
+        "Yes, we sell various accessories. Browse them here: [accessories link]."
+      ]
+    },
+    {
+      "tag": "product_categories",
+      "patterns": [
+        "Product categories",
+        "Categories of products you have",
+        "What product categories are available?"
+      ],
+      "responses": [
+        "We offer a range of product categories including laptops, desktops, tablets, monitors, and accessories.",
+        "Our product categories include laptops, desktops, tablets, monitors, and accessories. Explore them here: [categories link].",
+        "You can browse products by category here: [categories link]."
+      ]
+    }
+  ]
+}

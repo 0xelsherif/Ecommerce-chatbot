@@ -26,15 +26,18 @@ def execute_read_query(connection, query):
         print(f"The error '{e}' occurred")
         return None
 
-def log_chat_history(connection, customer_id, user_message, bot_response):
+def log_chat_history(connection, session_id, user_message, bot_response):
     query = """
-    INSERT INTO chat_history (customer_id, user_message, bot_response)
+    INSERT INTO chat_logs (session_id, message, response)
     VALUES (%s, %s, %s)
     """
-    values = (customer_id, user_message, bot_response)
+    values = (session_id, user_message, bot_response)
     cursor = connection.cursor()
     try:
         cursor.execute(query, values)
         connection.commit()
     except Error as e:
         print(f"The error '{e}' occurred")
+    finally:
+        cursor.close()
+

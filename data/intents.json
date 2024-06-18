@@ -4,108 +4,102 @@
       "tag": "greeting",
       "patterns": [
         "Hi",
+        "How are you",
+        "Is anyone there?",
         "Hello",
-        "Hey",
+        "Good day",
         "Good morning",
-        "Good afternoon",
-        "What's up"
+        "Good evening"
       ],
       "responses": [
         "Hello! How can I assist you today?",
-        "Hi there! How can I help?",
-        "Greetings! How may I assist you?"
+        "Hello, thanks for visiting",
+        "Good to see you again",
+        "Hi there, how can I help?",
+        "Hi there! What can I do for you?"
+      ]
+    },
+    {
+      "tag": "{category}",
+      "patterns": [
+        "What {category} do you have?",
+        "Show me {category}",
+        "I am looking for {category}",
+        "Do you sell {category}?",
+        "Available {category}",
+        "{category} in stock",
+        "Can you recommend a {category}?",
+        "What are your best {category}?"
+      ],
+      "responses": [
+        "Here are some {category} we have available: [{category}_link].",
+        "We have a variety of {category}. Check them out here: [{category}_link].",
+        "Looking for {category}? Browse our selection here: [{category}_link].",
+        "Yes, we sell {category}. Here are the ones currently available: [{category}_link].",
+        "Need a {category} recommendation? Explore our top picks: [{category}_link]."
+      ]
+    },
+    {
+      "tag": "{brand}",
+      "patterns": [
+        "What {brand} products do you have?",
+        "Show me {brand} products",
+        "I am looking for {brand} products",
+        "Do you sell {brand} products?",
+        "Available {brand} products",
+        "{brand} products in stock",
+        "Can you recommend a {brand} product?",
+        "What are your best {brand} products?"
+      ],
+      "responses": [
+        "Here are some {brand} products we have available: [{brand}_link].",
+        "We have a variety of {brand} products. Check them out here: [{brand}_link].",
+        "Looking for {brand} products? Browse our selection here: [{brand}_link].",
+        "Yes, we sell {brand} products. Here are the ones currently available: [{brand}_link].",
+        "Need a {brand} product recommendation? Explore our top picks: [{brand}_link]."
       ]
     },
     {
       "tag": "goodbye",
-      "patterns": [
-        "Bye",
-        "Goodbye",
-        "See you later",
-        "Take care",
-        "Farewell",
-        "Catch you later",
-        "Have a good day",
-        "See you soon",
-        "Talk to you later",
-        "Bye bye",
-        "Later"
-      ],
+      "patterns": ["Bye", "See you later", "Goodbye"],
       "responses": [
         "Goodbye! Have a great day!",
         "See you later! Take care!",
-        "Farewell! If you need anything else, feel free to ask.",
-        "Catch you later! Have a wonderful day!",
-        "Bye! Looking forward to assisting you again."
+        "See you later, thanks for visiting",
+        "Have a nice day",
+        "Bye! Come back again soon."
       ]
     },
     {
-      "tag": "laptops",
-      "patterns": [
-        "What laptops do you have?",
-        "Show me laptops",
-        "I am looking for laptops",
-        "Do you sell laptops?"
-      ],
-      "responses": ["Here are some laptops we have available: [laptops list]"]
+      "tag": "thanks",
+      "patterns": ["Thanks", "Thank you", "That's helpful"],
+      "responses": ["Happy to help!", "Any time!", "My pleasure"]
     },
     {
-      "tag": "desktops",
+      "tag": "hours",
       "patterns": [
-        "Do you have desktops?",
-        "Show me desktops",
-        "I am looking for desktops",
-        "Do you sell desktops?"
+        "What hours are you open?",
+        "What are your hours?",
+        "Are you open today?",
+        "When do you open today?",
+        "What are your hours today?",
+        "When are you open?"
       ],
       "responses": [
-        "Yes, we have a variety of desktops. Check them out here: [desktops link]."
+        "We're open every day from 09:00am - 05:00pm",
+        "Our hours are 09:00am - 05:00pm every day"
       ]
     },
     {
-      "tag": "tablets",
+      "tag": "payments",
       "patterns": [
-        "What kind of tablets do you offer?",
-        "Show me tablets",
-        "I am looking for tablets",
-        "Do you sell tablets?"
+        "Do you take credit cards?",
+        "Do you accept Mastercard?",
+        "Are you cash only?"
       ],
       "responses": [
-        "We offer a wide range of tablets. You can view them here: [tablets link]."
-      ]
-    },
-    {
-      "tag": "monitors",
-      "patterns": [
-        "I am looking for monitors",
-        "Show me monitors",
-        "Do you sell monitors?",
-        "What monitors do you have?"
-      ],
-      "responses": ["Here are the monitors we have available: [monitors link]."]
-    },
-    {
-      "tag": "accessories",
-      "patterns": [
-        "Do you sell accessories?",
-        "Show me accessories",
-        "I am looking for accessories",
-        "What accessories do you have?"
-      ],
-      "responses": [
-        "Yes, we sell various accessories. Browse them here: [accessories link]."
-      ]
-    },
-    {
-      "tag": "product_categories",
-      "patterns": [
-        "Product categories",
-        "Categories of products you have",
-        "What product categories are available?"
-      ],
-      "responses": [
-        "We offer a range of product categories including laptops, desktops, tablets, monitors, and accessories.",
-        "Our product categories include laptops, desktops, tablets, monitors, and accessories. Explore them here: [categories link].",
-        "You can browse products by category here: [categories link]."
+        "We accept VISA, Mastercard, Valu, and Meza",
+        "We accept most major credit cards"
       ]
     }
   ]
