@@ -4,40 +4,32 @@
       "tag": "greeting",
       "patterns": [
         "Hi",
+        "How are you",
+        "Is anyone there?",
         "Hello",
-        "How are you?",
         "Good day",
         "Good morning",
         "Good evening"
       ],
       "responses": [
         "Hello! How can I assist you today?",
+        "Hello, thanks for visiting",
+        "Good to see you again",
         "Hi there, how can I help?",
-        "Hello, thanks for visiting"
+        "Hi there! What can I do for you?"
       ]
     },
     {
-      "tag": "goodbye",
-      "patterns": ["Bye", "See you later", "Goodbye"],
-      "responses": ["Goodbye! Have a great day!", "See you later! Take care!"]
-    },
-    {
-      "tag": "thanks",
-      "patterns": ["Thanks", "Thank you", "That's helpful"],
-      "responses": ["Happy to help!", "Anytime!", "My pleasure!"]
-    },
-    {
-      "tag": "category_query",
+      "tag": "{category}",
       "patterns": [
-        "What laptops do you have?",
-        "Show me desktops",
-        "I am looking for smartphones",
-        "Do you sell tablets?",
-        "Available monitors",
-        "Laptops in stock",
-        "Can you recommend a laptop?",
-        "What are your best cameras?",
-        "What products are in the {category} category?"
+        "What {category} do you have?",
+        "Show me {category}",
+        "I am looking for {category}",
+        "Do you sell {category}?",
+        "Available {category}",
+        "{category} in stock",
+        "Can you recommend a {category}?",
+        "What are your best {category}?"
       ],
       "responses": [
         "Here are some {category} we have available: [{category}_link].",
@@ -48,17 +40,16 @@
       ]
     },
     {
-      "tag": "brand_query",
+      "tag": "{brand}",
       "patterns": [
-        "What Dell products do you have?",
-        "Show me HP products",
-        "I am looking for Lenovo products",
-        "Do you sell Samsung products?",
-        "Available Apple products",
-        "HP products in stock",
-        "Can you recommend a Dell product?",
-        "What are your best Acer products?",
-        "What {brand} products are available?"
+        "What {brand} products do you have?",
+        "Show me {brand} products",
+        "I am looking for {brand} products",
+        "Do you sell {brand} products?",
+        "Available {brand} products",
+        "{brand} products in stock",
+        "Can you recommend a {brand} product?",
+        "What are your best {brand} products?"
       ],
       "responses": [
         "Here are some {brand} products we have available: [{brand}_link].",
@@ -67,6 +58,22 @@
         "Yes, we sell {brand} products. Here are the ones currently available: [{brand}_link].",
         "Need a {brand} product recommendation? Explore our top picks: [{brand}_link]."
       ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["Bye", "See you later", "Goodbye"],
+      "responses": [
+        "Goodbye! Have a great day!",
+        "See you later! Take care!",
+        "See you later, thanks for visiting",
+        "Have a nice day",
+        "Bye! Come back again soon."
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": ["Thanks", "Thank you", "That's helpful"],
+      "responses": ["Happy to help!", "Any time!", "My pleasure"]
     },
     {
       "tag": "hours",

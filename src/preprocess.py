@@ -31,4 +31,4 @@ def load_intents(file_path):
 
 def get_best_match(input_sentence, patterns):
     best_match, score = process.extractOne(input_sentence, patterns)
-    return best_match if score >= 75 else None  # 75 is the confidence threshold
+    return best_match if score >= 75 else None
