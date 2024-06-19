@@ -1,20 +1,20 @@
 # Use the official Python image from the Docker Hub
-FROM python:3.11-slim
+FROM python:3.12-slim
+
+# Set environment variables 
+ENV PYTHONUNBUFFERED = 1
 
 # Set the working directory in the container
 WORKDIR /app
 
 # Copy the requirements.txt file into the container at /app
-COPY requirements.txt .
+COPY requirements.txt /app/requirements.txt
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the working directory contents into the container at /app
-COPY . .
-
-# Set environment variables (optional)
-# ENV NAME=Value
+COPY . /app/
 
 # Expose port 80 for the application
 EXPOSE 80
