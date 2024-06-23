@@ -31,39 +31,36 @@ function sendMessage() {
     messageContent.textContent = userInput.value;
 
     userMessage.appendChild(messageContent);
-
     chatBox.appendChild(userMessage);
 
-    // Simulate bot response
-    const botMessage = document.createElement('div');
-    botMessage.classList.add('message', 'bot');
+    // Fetch bot response from the server
+    fetch("/chat", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message: userInput.value })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Add bot's response
+        const botMessage = document.createElement('div');
+        botMessage.classList.add('message', 'bot');
 
-    const botMessageContent = document.createElement('div');
-    botMessageContent.classList.add('message-content');
-    botMessageContent.textContent = getBotResponse(userInput.value);
+        const botMessageContent = document.createElement('div');
+        botMessageContent.classList.add('message-content');
+        botMessageContent.textContent = data.response;
 
-    botMessage.appendChild(botMessageContent);
+        botMessage.appendChild(botMessageContent);
+        chatBox.appendChild(botMessage);
 
-    chatBox.appendChild(botMessage);
-
-    // Scroll to the bottom of the chat box
-    chatBox.scrollTop = chatBox.scrollHeight;
+        // Scroll to the bottom of the chat box
+        chatBox.scrollTop = chatBox.scrollHeight;
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
 
     // Clear the input field
     userInput.value = '';
-}
-
-function getBotResponse(userInput) {
-    // Basic responses, can be enhanced with NLP or other logic
-    const responses = {
-        'hello': 'Hi there! How can I help you today?',
-        'hi': 'Hello! How can I assist you?',
-        'how are you': 'I am just a bot, but I am here to help you!',
-        'bye': 'Goodbye! Have a great day!',
-        '': 'Please say something...'
-    };
-
-    const defaultResponse = 'Sorry, I didn\'t understand that. Can you please rephrase?';
-
-    return responses[userInput.toLowerCase()] || defaultResponse;
 }
