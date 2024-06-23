@@ -4,3 +4,4 @@ numpy
 mysql-connector-python
 fuzzywuzzy
 python-Levenshtein
+Flask 
