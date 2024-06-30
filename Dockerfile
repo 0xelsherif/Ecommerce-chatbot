@@ -16,11 +16,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the working directory contents into the container at /app
 COPY . /app/
 
-# Expose port 80 for the application
-EXPOSE 80
+# Expose port 5000 for the application
+EXPOSE 5000
 
 # Define the command to run the application
 # For example, if your main script is in src/chat.py, you would use:
-CMD ["python", "src/chat.py"]
+CMD ["python", "src/app.py"]
 
 # Optionally, you can include any additional setup commands or environment configurations as needed

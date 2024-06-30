@@ -43,24 +43,106 @@ function sendMessage() {
     })
     .then(response => response.json())
     .then(data => {
-        // Add bot's response
         const botMessage = document.createElement('div');
         botMessage.classList.add('message', 'bot');
+        
+        if (Array.isArray(data.response)) {
+            const slider = document.createElement('div');
+            slider.classList.add('slider');
+            
+            data.response.forEach(item => {
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('product');
 
-        const botMessageContent = document.createElement('div');
-        botMessageContent.classList.add('message-content');
-        botMessageContent.textContent = data.response;
+                if (item.name && item.description && item.price) {
+                    const productName = document.createElement('h3');
+                    productName.textContent = item.name;
+                    productDiv.appendChild(productName);
 
-        botMessage.appendChild(botMessageContent);
+                    const productDescription = document.createElement('p');
+                    productDescription.textContent = item.description;
+                    productDiv.appendChild(productDescription);
+
+                    const productPrice = document.createElement('p');
+                    productPrice.textContent = `Price: ${item.price}`;
+                    productDiv.appendChild(productPrice);
+
+                    const productImage = document.createElement('img');
+                    productImage.src = 'path/to/your/image.jpg'; // Update this with actual product image path
+                    productImage.alt = item.name;
+                    productDiv.appendChild(productImage);
+
+                    const orderButton = document.createElement('button');
+                    orderButton.textContent = 'Order now';
+                    orderButton.classList.add('order-button');
+                    productDiv.appendChild(orderButton);
+
+                    const showMoreButton = document.createElement('button');
+                    showMoreButton.textContent = 'Show more';
+                    showMoreButton.classList.add('show-more-button');
+                    productDiv.appendChild(showMoreButton);
+                } else {
+                    const messageContent = document.createElement('div');
+                    messageContent.classList.add('message-content');
+                    messageContent.textContent = item.message;
+                    productDiv.appendChild(messageContent);
+                }
+
+                slider.appendChild(productDiv);
+            });
+
+            botMessage.appendChild(slider);
+        } else {
+            const botMessageContent = document.createElement('div');
+            botMessageContent.classList.add('message-content');
+            botMessageContent.textContent = data.response.message;
+            botMessage.appendChild(botMessageContent);
+        }
+
         chatBox.appendChild(botMessage);
-
-        // Scroll to the bottom of the chat box
         chatBox.scrollTop = chatBox.scrollHeight;
+
+        if (data.response.length > 1) {
+            initializeSlider();
+        }
     })
     .catch(error => {
         console.error("Error:", error);
     });
 
-    // Clear the input field
     userInput.value = '';
+}
+
+function initializeSlider() {
+    const sliders = document.querySelectorAll('.slider');
+    sliders.forEach(slider => {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.classList.add('active');
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.classList.remove('active');
+        });
+
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.classList.remove('active');
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 3;
+            slider.scrollLeft = scrollLeft - walk;
+        });
+    });
 }

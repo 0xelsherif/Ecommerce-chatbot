@@ -84,10 +84,9 @@ def get_response(tag, intents_json, connection, sentence):
         print(f"Combined query: {query}")
         print(f"Products fetched: {products}")
         if products:
-            product_list = "\n".join([f"Product Name: {product[0]}\nDescription: {product[1]}\nPrice: ${product[2]:.2f}\n" for product in products])
-            return f"Here are some {brand_name} products in the {category_name} category we have available:\n\n{product_list}"
+            return [{"name": product[0], "description": product[1], "price": f"${product[2]:.2f}"} for product in products]
         else:
-            return f"Sorry, we currently do not have any {brand_name} products in the {category_name} category in stock."
+            return [{"message": f"Sorry, we currently do not have any {brand_name} products in the {category_name} category in stock."}]
 
     if brand_id:
         query = f"""
@@ -100,10 +99,9 @@ def get_response(tag, intents_json, connection, sentence):
         print(f"Brand query: {query}")
         print(f"Products fetched: {products}")
         if products:
-            product_list = "\n".join([f"Product Name: {product[0]}\nDescription: {product[1]}\nPrice: ${product[2]:.2f}\n" for product in products])
-            return f"Here are some {brand_name} products we have available:\n\n{product_list}"
+            return [{"name": product[0], "description": product[1], "price": f"${product[2]:.2f}"} for product in products]
         else:
-            return f"Sorry, we currently do not have any {brand_name} products in stock."
+            return [{"message": f"Sorry, we currently do not have any {brand_name} products in stock."}]
 
     if category_id:
         query = f"""
@@ -116,18 +114,18 @@ def get_response(tag, intents_json, connection, sentence):
         print(f"Category query: {query}")
         print(f"Products fetched: {products}")
         if products:
-            product_list = "\n".join([f"Product Name: {product[0]}\nDescription: {product[1]}\nPrice: ${product[2]:.2f}\n" for product in products])
-            return f"Here are some products we have available in the {category_name} category:\n\n{product_list}"
+            return [{"name": product[0], "description": product[1], "price": f"${product[2]:.2f}"} for product in products]
         else:
-            return f"Sorry, we currently do not have any products in the {category_name} category in stock."
+            return [{"message": f"Sorry, we currently do not have any products in the {category_name} category in stock."}]
 
     # Default response for unknown tags
     for intent in intents_json["intents"]:
         if intent["tag"].lower() == tag:
             responses = [response.replace("{category}", category_name if category_name else "category")
                          .replace("{brand}", brand_name if brand_name else "brand") for response in intent["responses"]]
-            return random.choice(responses)
-    return "I'm not sure I understand. Can you please clarify?"
+            return [{"message": random.choice(responses)}]
+    return [{"message": "I'm not sure I understand. Can you please clarify?"}]
+
 
 def create_session_if_not_exists(connection, session_id):
     query = "SELECT id FROM chat_sessions WHERE id = %s"
@@ -161,17 +159,7 @@ def chat_with_bot(sentence, session_id):
     if prob.item() > confidence_threshold:
         response = get_response(tag, intents, connection, sentence)
     else:
-        response = "I'm not sure I understand. Can you please clarify?"
+        response = [{"message": "I'm not sure I understand. Can you please clarify?"}]
 
-    log_chat_history(connection, session_id, sentence, response)
+    log_chat_history(connection, session_id, sentence, json.dumps(response))
     return response
-
-if __name__ == "__main__":
-    print("Let's chat! (type 'quit' to exit)")
-    session_id = 1  # This should be dynamically set based on your application logic
-    while True:
-        sentence = input("You: ")
-        if sentence == "quit":
-            break
-        response = chat_with_bot(sentence, session_id)
-        print(f"{bot_name}: {response}")

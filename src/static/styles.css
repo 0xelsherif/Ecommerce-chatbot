@@ -121,3 +121,61 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
+
+.slider {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 10px 0;
+    scroll-behavior: smooth;
+}
+
+.slider::-webkit-scrollbar {
+    display: none;
+}
+
+.slider.active {
+    cursor: grabbing;
+}
+
+.product {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+    max-width: 200px;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.product h3 {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.product p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.product img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.order-button, .show-more-button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #3a3a3a;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+}
