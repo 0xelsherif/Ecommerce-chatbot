@@ -1,5 +1,6 @@
 # E-commerce Customer Support Chatbot
 [![Tests](https://github.com/0xelsherif/Ecommerce-chatbot/actions/workflows/python-tests.yml/badge.svg)](https://github.com/0xelsherif/Ecommerce-chatbot/actions/workflows/python-tests.yml)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/0xelsherif/Ecommerce-chatbot/blob/main/LICENSE)
 
 
 ## Overview
